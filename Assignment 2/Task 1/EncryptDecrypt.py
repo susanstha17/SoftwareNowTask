@@ -23,7 +23,7 @@ def encrypt_textFile(raw_text_file, shift1, shift2):
                 - If the letter is in the first half of the alphabet (a-m): shift forward by shift1 * shift2 positions
                 - If the letter is in the second half (n-z): shift backward by shift1 + shift2 positions
             '''
-            if char <= 'm':
+            if 'a' <= char <= 'm':
                 # If the letter is in the first half (a-m), shift forward
                 shift = shift1 * shift2
             else:
@@ -38,7 +38,7 @@ def encrypt_textFile(raw_text_file, shift1, shift2):
                 - If the letter is in the first half (A-M): shift backward by shift1 positions
                 - If the letter is in the second half (N-Z): shift forward by shift2² positions (shift2 squared)
             '''
-            if char <= 'M':
+            if 'A' <= char <= 'M':
                 # If the letter is in the first half (A-M), shift backward
                 shift = -shift1
             else:
@@ -75,7 +75,7 @@ def decrypt_textFile(encrypted_text_file, shift1, shift2):
                 - If the letter is in the first half of the alphabet (a-m): shift backward by shift1 * shift2 positions
                 - If the letter is in the second half (n-z): shift forward by shift1 + shift2 positions
             '''
-            if char <= 'm':
+            if 'a' <= char <= 'm':
                 # If the letter is in the first half (a-m), shift backward
                 shift = -(shift1 * shift2)
             else:
@@ -90,7 +90,7 @@ def decrypt_textFile(encrypted_text_file, shift1, shift2):
                 - If the letter is in the first half (A-M): shift forward by shift1 positions
                 - If the letter is in the second half (N-Z): shift backward by shift2² positions (shift2 squared)
             '''
-            if char <= 'M':
+            if 'A' <= char <= 'M':
                 # If the letter is in the first half (A-M), shift forward
                 shift = shift1
             else:
@@ -104,6 +104,11 @@ def decrypt_textFile(encrypted_text_file, shift1, shift2):
     print(f'Decryption of {encrypted_text_file} has completed.')
     return decrypted_data
 
+# Function to verify the integrity of the decrypted data
+def verify_content(original_file, decrypted_file):
+    # Check if the original and decrypted files match
+    with open(original_file, "r") as file1, open(decrypted_file, "r") as file2:
+        return file1.read() == file2.read()
 
 #main function
 def main():
@@ -134,6 +139,12 @@ def main():
     with open(decrypted_text, "w") as file:
         file.write(decrypted_data)
     print("Data decrypted successfully.")
+
+    # Verify the integrity of the decrypted data
+    if verify_content(raw_text, decrypted_text):
+        print("Verification successful! Original and decrypted data match.")
+    else:
+        print("Verification failed! Original and decrypted data do not match.")
 
 # call the main function
 if __name__ == "__main__":
