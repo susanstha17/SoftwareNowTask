@@ -1,2 +1,2 @@
-this is a raw text fite fgr efcryhtigf
-The text witt be efcryhted
+this is a raw text file for encryption
+The text will be encrypted
