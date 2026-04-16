@@ -37,3 +37,8 @@ Input: 6 * 3 - 8 / 4
 Tree: (- (* 6 3) (/ 8 4))
 Tokens: [NUM:6] [OP:*] [NUM:3] [OP:-] [NUM:8] [OP:/] [NUM:4] [END]
 Result: 16
+
+Input: 6 + 2 * 8 - 4
+Tree: (- (+ 6 (* 2 8)) 4)
+Tokens: [NUM:6] [OP:+] [NUM:2] [OP:*] [NUM:8] [OP:-] [NUM:4] [END]
+Result: 18
